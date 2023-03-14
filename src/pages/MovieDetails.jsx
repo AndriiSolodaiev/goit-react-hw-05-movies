@@ -7,12 +7,12 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const previousParentRoute = useRef('/movies');
+  const from = location.state?.from;
   useEffect(() => {
-    const from = location.state?.from;
     if (from) {
       previousParentRoute.current = `${from.pathname}${from.search || ''}`;
     }
-  }, []);
+  }, [from]);
 
   useEffect(() => {
     fetchMovieInfo(movieId).then(data => setMovieInfo(data));
